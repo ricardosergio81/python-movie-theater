@@ -10,3 +10,4 @@ services:
     depends_on:
       - cast_service
       - movie_service
+      - movie_theaters_service
