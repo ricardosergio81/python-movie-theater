@@ -22,7 +22,7 @@ async def get_movies():
 
 @moviesTheaters.get('/{id}/', response_model=MovieTheaterOut)
 async def get_movie(id: int):
-    movie = await db_manager.get_movie(id)
+    movie = await db_manager.get_movie_theater(id)
     if not movie:
         raise HTTPException(status_code=404, detail="Movie not found")
     return movie
