@@ -4,10 +4,20 @@ from fastapi import APIRouter, HTTPException
 from app.api.in_theaters.models import (InTheatersIn, InTheatersOut, InTheatersUpdate)
 from app.api.in_theaters import db_manager
 
+from app.api.in_theaters.service import is_movie_theater_present, is_movie_present
+
 inTheaters = APIRouter()
 
 @inTheaters.post('/', response_model=InTheatersOut, status_code=201)
 async def create_in_theater(payload: InTheatersIn):
+    theater_id = payload.theaters_id
+    if not is_movie_theater_present(theater_id):
+        raise HTTPException(status_code=404, detail=f"Movie Theater with given id:{theater_id} not found")
+
+    movies_id = payload.movie_id
+    if not is_movie_present(movies_id):
+        raise HTTPException(status_code=404, detail=f"Movie with given id:{movies_id} not found")
+
     movie_id = await db_manager.add_in_theater(payload)
     response = {
         'id': movie_id,

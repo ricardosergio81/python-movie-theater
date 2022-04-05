@@ -10,6 +10,8 @@ services:
       - 8003:8000
     environment:
       - DATABASE_URI=postgresql://movie_theaters_db_username:movie_theaters_db_password@movie_theaters_db/movie_theaters_db_dev
+      - MOVIE_SERVICE_HOST_URL=http://nginx:8080/api/v1/movies/
+      - MOVIE_THEATER_SERVICE_HOST_URL=http://nginx:8080/api/v1/movies-theater/
     depends_on:
       - movie_theaters_db
 
