@@ -5,3 +5,4 @@
 /cast-service/venv/
 /cast-service/.idea
 .idea
+.env
