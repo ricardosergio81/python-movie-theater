@@ -1,0 +1,6 @@
+pytest==6.2.3
+requests==2.25.1
+starlette==0.12.9
+aiosqlite==0.17.0
+
+-r requirements.txt
