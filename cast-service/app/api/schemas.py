@@ -10,6 +10,9 @@ class CastIn(BaseModel):
 class CastOut(CastIn):
     id: int
 
+    class Config:
+        orm_mode = True
+
 
 class CastUpdate(CastIn):
     name: Optional[str] = None

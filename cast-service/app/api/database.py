@@ -1,12 +1,17 @@
 import os
 
 from sqlalchemy import (MetaData, create_engine)
-
+from sqlalchemy.orm import sessionmaker
 from databases import Database
+from sqlalchemy.ext.declarative import declarative_base
 
 DATABASE_URI = os.getenv('DATABASE_URI')
 
-engine = create_engine(DATABASE_URI)
-metadata = MetaData()
+engine = create_engine(
+    DATABASE_URI
+)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-database = Database(DATABASE_URI)
+Base = declarative_base()
+
+

@@ -1,11 +1,10 @@
-from app.api.database import metadata
-from sqlalchemy import (Column, Integer, String, Table)
+from app.api.database import Base
+from sqlalchemy import (Column, Integer, String)
 
 
-casts = Table(
-    'casts',
-    metadata,
-    Column('id', Integer, primary_key=True),
-    Column('name', String(50)),
-    Column('nationality', String(20))
-)
+class Casts(Base):
+    __tablename__ = "casts"
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String(50), index=True)
+    nationality = Column(String(20), index=True)
+
