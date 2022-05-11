@@ -1,11 +1,8 @@
-from pydantic import BaseModel, Field
-from typing import List, Optional
+from app.api.database import Base
+from sqlalchemy import (Column, Integer, String, Table, MetaData)
 
-class MovieTheaterIn(BaseModel):
-    name: str
 
-class MovieTheaterOut(MovieTheaterIn):
-    id: int
-
-class MovieTheaterUpdate(MovieTheaterIn):
-    name: Optional[str] = None
+class Theaters(Base):
+    __tablename__ = "theaters"
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50))
