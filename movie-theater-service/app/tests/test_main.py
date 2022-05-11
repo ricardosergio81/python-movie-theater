@@ -36,56 +36,56 @@ def test_post_movie_theater(client: TestClient):
     data = response.json()
     assert data["name"] == "Ricardo Rosa"
     assert "id" in data
-    cast_id = data["id"]
+    movie_theater_id = data["id"]
 
-    response = client.get(f"/api/v1/movies-theater/{cast_id}/")
+    response = client.get(f"/api/v1/movies-theater/{movie_theater_id}/")
     assert response.status_code == 200, response.text
     data = response.json()
     assert data["name"] == "Ricardo Rosa"
-    assert data["id"] == cast_id
+    assert data["id"] == movie_theater_id
 
 
 def test_get_movie_theater(client: TestClient):
-    cast_id = 1
-    response = client.get(f"/api/v1/movies-theater/{cast_id}/")
+    movie_theater_id = 1
+    response = client.get(f"/api/v1/movies-theater/{movie_theater_id}/")
     assert response.status_code == 200, response.text
     data = response.json()
     assert data["name"] == "Ricardo Rosa"
-    assert data["id"] == cast_id
+    assert data["id"] == movie_theater_id
 
 
-def test_get_all_cast(client: TestClient):
-    cast_id = 1
+def test_get_all_movie_theater(client: TestClient):
+    movie_theater_id = 1
     response = client.get(f"/api/v1/movies-theater/")
     assert response.status_code == 200, response.text
     data = response.json()
     assert data[0]["name"] == "Ricardo Rosa"
-    assert data[0]["id"] == cast_id
+    assert data[0]["id"] == movie_theater_id
 
 
-def test_put_cast(client: TestClient):
-    cast_id = 1
+def test_put_movie_theater(client: TestClient):
+    movie_theater_id = 1
     response = client.put(
-        f"/api/v1/movies-theater/{cast_id}/",
+        f"/api/v1/movies-theater/{movie_theater_id}/",
         json={"name": "Name changed"}
     )
     assert response.status_code == 200, response.text
     data = response.json()
     assert data["name"] == "Name changed"
     assert "id" in data
-    assert data["id"] == cast_id
+    assert data["id"] == movie_theater_id
 
 
-def test_put_cast_id_not_found(client: TestClient):
-    cast_id = 9999999
+def test_put_movie_theater_id_not_found(client: TestClient):
+    movie_theater_id = 9999999
     response = client.put(
-        f"/api/v1/movies-theater/{cast_id}/",
+        f"/api/v1/movies-theater/{movie_theater_id}/",
         json={"name": "Name changed"}
     )
     assert response.status_code == 404, response.text
 
 
-def test_get_cast_not_found(client: TestClient):
-    cast_id = 9999999
-    response = client.get(f"/api/v1/movies-theater/{cast_id}/")
+def test_get_movie_theater_not_found(client: TestClient):
+    movie_theater_id = 9999999
+    response = client.get(f"/api/v1/movies-theater/{movie_theater_id}/")
     assert response.status_code == 404, response.text
